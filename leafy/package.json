@@ -1,19 +1,47 @@
 {
   "name": "leafy",
   "displayName": "Leafy",
-  "description": "",
+  "description": "Grow a digital garden as you code — each focused session earns a new plant.",
   "version": "0.0.1",
   "engines": {
-    "vscode": "^1.125.0"
+    "vscode": "^1.90.0"
   },
   "categories": [
     "Other"
   ],
-  "activationEvents": [
-    
-  ],
+  "activationEvents": [],
   "main": "./src/extension.js",
   "contributes": {
+    "commands": [
+      {
+        "command": "leafy.mockPlant",
+        "title": "Leafy: [TEST] Inject Mock Plant"
+      },
+      {
+        "command": "leafy.clearGarden",
+        "title": "Leafy: [TEST] Clear Garden Cache"
+      },
+      {
+        "command": "leafy.mockTimer",
+        "title": "Leafy: [TEST] Simulate Active Minutes"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command": "leafy.mockPlant",
+          "when": "inDevelopmentMode"
+        },
+        {
+          "command": "leafy.clearGarden",
+          "when": "inDevelopmentMode"
+        },
+        {
+          "command": "leafy.mockTimer",
+          "when": "inDevelopmentMode"
+        }
+      ]
+    },
     "viewsContainers": {
       "activitybar": [
         {
@@ -39,15 +67,15 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.125.0",
+    "@types/vscode": "^1.90.0",
     "@types/mocha": "^10.0.10",
-    "@types/node": "24.x",
-    "eslint": "^10.5.0",
+    "@types/node": "20.x",
+    "eslint": "^9.5.0",
     "@vscode/test-cli": "^0.0.15",
     "@vscode/test-electron": "^3.0.0"
   },
   "overrides": {
-    "diff": "^8.0.4",
-    "serialize-javascript": "^7.0.6"
+    "diff": "^5.2.0",
+    "serialize-javascript": "^6.0.2"
   }
 }

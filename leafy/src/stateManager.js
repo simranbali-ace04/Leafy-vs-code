@@ -1,50 +1,57 @@
-const vscode = require('vscode');
+// stateManager.js — a thin wrapper around VS Code's built-in storage.
+// This keeps the user's garden data safe between restarts.
 
-// This variable will hold our reference to VS Code's extension context
+const vscode = require("vscode");
+
+// We stash the extension context here after activate() calls initialize().
+// Every other function grabs it from this variable rather than threading it around.
 let extensionContext = null;
 
 /**
- * Initializes the state manager by storing the extension context reference.
- * We must call this exactly once inside our main extension activate() function.
- * @param {vscode.ExtensionContext} context 
+ * Store a reference to the extension context so we can read/write global state later.
+ * Must be called once from activate() before anything else touches this module.
+ * @param {vscode.ExtensionContext} context
  */
 function initialize(context) {
-    extensionContext = context;
+  extensionContext = context;
 }
 
 /**
- * Retrieves the user's saved garden array from local storage.
- * In other cases (like a brand new installation), it returns an empty array [].
- * @returns {Array} List of plants currently in the user's garden
+ * Read the user's garden from persistent storage.
+ * Returns an empty array if nothing has been saved yet (fresh install, or just cleared).
+ * @returns {Array} The list of plants the user has grown.
  */
 function getGarden() {
-    if (!extensionContext) {
-        console.error('⚠️ Leafy State Error: Attempted to read garden before initialization.');
-        return [];
-    }
-    
-    // Read the data out of VS Code's global state storage. 
-    // If it doesn't exist yet, fallback to a fresh empty array.
-    return extensionContext.globalState.get('leafy_garden_data') || [];
+  if (!extensionContext) {
+    console.error(
+      "Leafy State Error: Tried to read garden before initialization.",
+    );
+    return [];
+  }
+
+  // VS Code's globalState works like a tiny key-value store on disk.
+  // If the key doesn't exist yet, we default to a fresh, empty garden.
+  return extensionContext.globalState.get("leafy_garden_data") || [];
 }
 
 /**
- * Overwrites the saved garden data with a freshly updated array list.
- * @param {Array} newGardenData 
+ * Replace the saved garden with a new array.
+ * Called every time a plant is earned (or when the user clears their garden via dev command).
+ * @param {Array} newGardenData
  */
 function saveGarden(newGardenData) {
-    if (!extensionContext) {
-        console.error('⚠️ Leafy State Error: Attempted to save garden before initialization.');
-        return;
-    }
-    
-    // Persist the array data cleanly to the user's local disk
-    extensionContext.globalState.update('leafy_garden_data', newGardenData);
+  if (!extensionContext) {
+    console.error(
+      "Leafy State Error: Tried to save garden before initialization.",
+    );
+    return;
+  }
+
+  extensionContext.globalState.update("leafy_garden_data", newGardenData);
 }
 
-// Export our module functions so that extension.js and our tracking engine can use them
 module.exports = {
-    initialize,
-    getGarden,
-    saveGarden
+  initialize,
+  getGarden,
+  saveGarden,
 };
