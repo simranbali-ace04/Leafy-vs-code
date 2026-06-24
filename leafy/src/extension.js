@@ -1,6 +1,8 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
-const vscode = require('vscode');
+const vscode = require("vscode");
+
+const stateManager = require("./stateManager"); //Import the state manager module
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -9,31 +11,48 @@ const vscode = require('vscode');
  * @param {vscode.ExtensionContext} context
  */
 function activate(context) {
+  stateManager.initialize(context); // Initialise the context so it can access the global state
+  // Use the console to output diagnostic information (console.log) and errors (console.error)
+  // This line of code will only be executed once when your extension is activated
+  console.log(
+    "🌱 Leafy has successfully sprouted and is running in the background!",
+  );
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('🌱 Leafy has successfully sprouted and is running in the background!');
+  console.log("Current Garden Data:", stateManager.getGarden()); // Getting the Garden data
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with  registerCommand
-	// The commandId parameter must match the command field in package.json
-	// const disposable = vscode.commands.registerCommand('leafy.helloWorld', function () {
-	// 	// The code you place here will be executed every time your command is executed
+  vscode.window.registerWebviewViewProvider("leafy.gardenView", {
+    resolveWebviewView: (webviewView) => {
+      webviewView.webview.options = { enableScripts: true };
+      webviewView.webview.html = `
+                <!DOCTYPE html>
+                <html>
+                <body>
+                    <h3>🌱 Garden Loading Area</h3>
+                </body>
+                </html>
+            `;
+    },
+  });
 
-	// 	// Display a message box to the user
-	// 	vscode.window.showInformationMessage('Hello World from Leafy!');
-	// });
+  // The command has been defined in the package.json file
+  // Now provide the implementation of the command with  registerCommand
+  // The commandId parameter must match the command field in package.json
+  // const disposable = vscode.commands.registerCommand('leafy.helloWorld', function () {
+  // 	// The code you place here will be executed every time your command is executed
 
-// 	context.subscriptions.push(disposable);
+  // 	// Display a message box to the user
+  // 	vscode.window.showInformationMessage('Hello World from Leafy!');
+  // });
+
+  // 	context.subscriptions.push(disposable);
 }
 
 // This method is called when your extension is deactivated
 function deactivate() {
-	console.log('🍂 Leafy is going to sleep...');
-	
+  console.log("🍂 Leafy is going to sleep...");
 }
 
 module.exports = {
-	activate,
-	deactivate
-}
+  activate,
+  deactivate,
+};
