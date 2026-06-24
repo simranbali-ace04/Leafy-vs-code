@@ -1,65 +1,57 @@
-# leafy README
+# Leafy 
 
-This is the README for your extension "leafy". After writing up a brief description, we recommend including the following sections.
+Leafy is a simple, automated productivity companion built directly into your VS Code sidebar. It quietly tracks your active coding sessions in the background and rewards your focused deep-work blocks by growing a beautiful, persistent digital garden.
 
-## Features
-
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
-
-For example if there is an image subfolder under your extension project workspace:
-
-\!\[feature X\]\(images/feature-x.png\)
-
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
-
-## Requirements
-
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
-
-## Extension Settings
-
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
-
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
+No manual timers, no rigid alarms—just start typing, and watch your garden grow.
 
 ---
 
-## Working with Markdown
+## ✨ How It Works
 
-You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
+Leafy monitors your workspace activity using subtle, non-intrusive triggers (such as keypresses, cursor movements, and tab switching) to keep your focus tracking perfectly accurate.
 
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets
+* **Active Session Ticker:** The engine tracks your active minutes. As long as you are actively reading, writing, or debugging code, your session stays wide awake.
+* **The Inactivity Safety Net:** If you take a coffee break or step away from your keyboard for more than **15 minutes**, Leafy safely wraps up your current progress, awards you the appropriate milestone plant, and saves your data securely.
+* **The Infinity Loop (Prestige):** For extreme deep-work marathons, crossing the 3-hour mark (180 minutes) automatically harvests a **Majestic Tree** and cleanly resets your progress bar so you can start working toward your next plant in the exact same session.
 
-## For more information
+---
 
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
+## 📊 Plant Milestones & Tiers
 
-**Enjoy!**
+Your session length determines the exact tier of the plant you sprout. 
+
+| Focus Duration | Plant Reward |
+| :--- | :--- |
+| **15 Minutes** | Mint Sprout 🌱 |
+| **30 Minutes** | Succulent 🪴 |
+| **60 Minutes** | Sunflower 🌻 |
+| **120 Minutes** | Cactus 🌵 |
+| **150 Minutes** | Bamboo 🎍 |
+| **180 Minutes (3 Hours)** | Majestic Tree 🌳 |
+
+---
+
+## 🗺️ Interface & Features
+
+### 🗂️ The Infinite Garden Grid
+Your sidebar begins as a standard $3 \times 3$ grid plot. As you complete more focus sessions, the grid automatically adapts. When you earn your 10th plant, the garden dynamically generates a new row, expanding vertically forever to preserve your entire coding history.
+
+### 🔍 Detailed Achievement Tooltips
+Hovering your cursor over any harvested plant reveals a persistent log detailing its exact species name, the precise number of focused minutes spent growing it, and a clean timestamp marking the exact day and time it was planted.
+
+---
+
+## 📦 How to Install (.VSIX)
+
+Since Leafy is currently in its community preview phase, you can install it manually in seconds using the packaged file:
+
+1.  Open **VS Code**.
+2.  Navigate to your **Extensions** view (`Ctrl + Shift + X` or `Cmd + Shift + X`).
+3.  Click the **`...`** (three dots) icon at the top right of the Extensions panel sidebar wrapper.
+4.  Select **Install from VSIX...** from the dropdown menu.
+5.  Choose the `leafy-0.0.1.vsix` file from your device.
+
+---
+
+## 🔒 Privacy & Local Persistence
+Your privacy is fully respected. Leafy does **not** collect, upload, or transmit any code text, keystroke telemetry, or project data to external clouds or servers. Everything—including your accumulated minutes and total plant arrays—is written and preserved completely offline inside your machine's secure local application storage.

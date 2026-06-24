@@ -33,6 +33,11 @@ function activate(context) {
   const registeredView = vscode.window.registerWebviewViewProvider(
     "leafy.gardenView",
     gardenProvider,
+    {
+      webviewOptions: {
+        retainContextWhenHidden: true // Keeps the HTML grid alive when hidden
+      }
+    }
   );
   context.subscriptions.push(registeredView);
 
