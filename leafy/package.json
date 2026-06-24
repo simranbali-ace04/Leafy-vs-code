@@ -10,12 +10,26 @@
     "Other"
   ],
   "activationEvents": [],
-  "main": "./extension.js",
+  "main": "./src/extension.js",
   "contributes": {
-    "commands": [{
-      "command": "leafy.helloWorld",
-      "title": "Hello World"
-    }]
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "leafy-garden-container",
+          "title": "Leafy Garden",
+          "icon": "media/plants/mint_sprout.svg"
+        }
+      ]
+    },
+    "views": {
+      "leafy-garden-container": [
+        {
+          "type": "webview",
+          "id": "leafy.gardenView",
+          "name": "My Garden"
+        }
+      ]
+    }
   },
   "scripts": {
     "lint": "eslint .",
